@@ -6,8 +6,8 @@ import WC_d from '../WCamData.jsx';
 function Basei_Micro() {
     const videoRef = useRef(null);
     const pix_Shake= (cell) => {
-        cell.pixSnap_y = Math.random() * 45;
-        cell.pixSnap_x = Math.random() * 4;
+        cell.pixSnap_y = Math.random() * 8;
+        cell.pixSnap_x = Math.random() * 8;
       };
 
 
@@ -20,8 +20,8 @@ function Basei_Micro() {
                 bgCol="#ffb"
                 cel_wi={420}
                 cel_hi={360}
-                cel_div_wi={82}
-                cel_div_hi={82}
+                cel_div_wi={16}
+                cel_div_hi={16}
             />
             <WC_d
                 videoRef={videoRef} 

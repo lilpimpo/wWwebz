@@ -30,6 +30,10 @@ function CanvGrido({ IDenti, videoRef,fxMo, bgCol, cel_wi, cel_hi, cel_div_wi, c
           this.x  - this.pixSnap_x , this.y - this.pixSnap_y, this.width, this.height,
           this.x , this.y , this.width, this.height
         );
+
+        
+
+        
       }
 
       updato() {
