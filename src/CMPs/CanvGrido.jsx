@@ -22,9 +22,7 @@ function CanvGrido({ IDenti, videoRef,fxMo, bgCol, cel_wi, cel_hi, cel_div_wi, c
         this.width = this.effecto.celWi;
         this.height = this.effecto.celHi;
         this.pixSnap_x = 0;//Math.random() * 2;
-        this.pixSnap_y = 0;//Math.random() * 2;
-      
-        
+        this.pixSnap_y = 0;//Math.random() * 2; 
       }
 
       draw(contexta) {
@@ -132,7 +130,7 @@ function CanvGrido({ IDenti, videoRef,fxMo, bgCol, cel_wi, cel_hi, cel_div_wi, c
     };
 
     const frameIntervalId = setInterval(captureFrame, 264); // Capture frame every 2 seconds
-    const renderIntervalId = setInterval(renderFrame, 104 / 30); // Render at 30fps
+    const renderIntervalId = setInterval(renderFrame, 40 / 30); // Render at 30fps
     const pixInterval = setInterval(limpiaPix,8000);
     const fxInterval= setInterval(FxModeON,100);
 
