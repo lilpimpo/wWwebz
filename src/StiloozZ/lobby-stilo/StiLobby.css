@@ -1,0 +1,61 @@
+body {
+  margin: 0px;
+  background-color: #ffffee;
+}
+
+.logono {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 41%;
+  padding: 2px;
+  max-width: 100%;
+}
+
+.SupIzq {
+  display: inline-flex;
+  position: absolute;
+  max-width: 80%;
+  height: 10%;
+  padding: 2em;
+  top: 12%;
+  left: 5em;
+  border-top: 8px solid black;
+  border-left: 8px solid black;
+}
+
+.SupDere {
+  display: inline-flex;
+  position: absolute;
+  max-width: 80%;
+  height: 10%;
+  padding: 2em;
+  top: 12%;
+  right: 20%;
+  border-top: 8px solid black;
+  border-right: 8px solid black;
+}
+
+.InfDere {
+  display: inline-flex;
+  position: absolute;
+  max-width: 80%;
+  height: 10%;
+  padding: 2em;
+  bottom: 12%;
+  right: 20%;
+  border-bottom: 8px solid black;
+  border-right: 8px solid black;
+}
+
+.InfIzq {
+  display: inline-flex;
+  position: absolute;
+  max-width: 80%;
+  height: 10%;
+  padding: 2em;
+  bottom: 12%;
+  left: 5em;
+  border-bottom: 8px solid black;
+  border-left: 8px solid black;
+}/*# sourceMappingURL=StiLobby.css.map */

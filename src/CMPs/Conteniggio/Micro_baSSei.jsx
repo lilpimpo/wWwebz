@@ -12,13 +12,13 @@ function Basei_Micro() {
             <CanvGrido
                 IDenti="Bassei"
                 videoRef={videoRef}
-                fxMo={preservo}
+                fxMo={deforMouse}
                 bgCol="#ffb"
                 cel_wi={420}
                 cel_hi={360}
-                cel_div_wi={68}
-                cel_div_hi={64}
-                radiu={50}
+                cel_div_wi={800}
+                cel_div_hi={208}
+                radiu={100}
             />
             <WC_d
                 videoRef={videoRef} 

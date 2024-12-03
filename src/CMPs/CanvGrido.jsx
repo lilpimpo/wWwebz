@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
-function CanvGrido({ IDenti, videoRef,fxMo, bgCol, cel_wi, cel_hi, cel_div_wi, cel_div_hi,radiu }) {
+function CanvGrido({ IDenti, videoRef, fxMo, bgCol, cel_wi, cel_hi, cel_div_wi, cel_div_hi, radiu }) {
   const canv_Ref = useRef(null);
   const frameRef = useRef(null);
 
@@ -14,38 +14,41 @@ function CanvGrido({ IDenti, videoRef,fxMo, bgCol, cel_wi, cel_hi, cel_div_wi, c
     }
 
     class Cell {
-
       constructor(effecto, x, y) {
         this.effecto = effecto;
         this.x = x;
         this.y = y;
         this.width = this.effecto.celWi;
         this.height = this.effecto.celHi;
-        this.pixSnap_x = 0;//Math.random() * 2;
-        this.pixSnap_y = 0;//Math.random() * 2; 
+        this.pixSnap_x = 0;
+        this.pixSnap_y = 0;
       }
 
       draw(contexta) {
-        //contexta.strokeStyle = bgCol;
-       // contexta.strokeRect(this.x, this.y, this.width, this.height);
-       if (vid.readyState === 4) { // Check if the video is ready
+        if (vid.readyState === 4) { // Check if the video is ready
           contexta.drawImage(
             frameRef.current,
             this.x + this.pixSnap_x, this.y + this.pixSnap_y, this.width, this.height,
             this.x, this.y, this.width, this.height
           );
         }
+      }
 
-      } 
-      //esta funcion actualiza el effecto a aplicar en la celdas
       updato() {
         fxMo(this);
+      }
+
+      reset() {
+        this.pixSnap_x = 0;
+        this.pixSnap_y = 0;
       }
     }
 
     class Effeckt {
-      constructor(canvai) {
+      constructor(canvai, video, frameRef) {
         this.canvas = canvai;
+        this.video = video;
+        this.frameRef = frameRef;
         this.width = this.canvas.width;
         this.height = this.canvas.height;
         this.celWi = this.width / cel_div_wi;
@@ -53,23 +56,21 @@ function CanvGrido({ IDenti, videoRef,fxMo, bgCol, cel_wi, cel_hi, cel_div_wi, c
         this.imgGrido = [];
         this.creaGrido();
 
-        //eventos mauss
         this.mouse = {
-          x:undefined,
-          y:undefined,
-          radius: radiu,
-        }
+          x: undefined,
+          y: undefined,
+          radius: radiu / this.canvas.width * this.canvas.height,
+        };
 
-        this.canvas.addEventListener('mousemove',e => {
+        this.canvas.addEventListener('mousemove', e => {
           this.mouse.x = e.offsetX;
           this.mouse.y = e.offsetY;
-          //console.log("MOSSS=> ",this.mouse.x,this.mouse.y);
         });
-        this.canvas.addEventListener('mouseleave',e => {
+
+        this.canvas.addEventListener('mouseleave', e => {
           this.mouse.x = undefined;
           this.mouse.y = undefined;
           this.resetCells();
-          //console.log("MOSSS=> ",this.mouse.x,this.mouse.y);
         });
       }
 
@@ -92,6 +93,12 @@ function CanvGrido({ IDenti, videoRef,fxMo, bgCol, cel_wi, cel_hi, cel_div_wi, c
           cellDraw.updato();
         });
       }
+
+      resetCells() {
+        this.imgGrido.forEach(cell => {
+          cell.reset();
+        });
+      }
     }
 
     const ctx = canvai.getContext('2d');
@@ -103,7 +110,7 @@ function CanvGrido({ IDenti, videoRef,fxMo, bgCol, cel_wi, cel_hi, cel_div_wi, c
     canvai.width = cel_wi;
     canvai.height = cel_hi;
 
-    const efe = new Effeckt(canvai);
+    const efe = new Effeckt(canvai, vid, frameRef);
 
     const captureFrame = () => {
       const offscreenCanvas = document.createElement('canvas');
@@ -115,24 +122,21 @@ function CanvGrido({ IDenti, videoRef,fxMo, bgCol, cel_wi, cel_hi, cel_div_wi, c
     };
 
     const renderFrame = () => {
-      //ctx.globalCompositeOperation = "source-over"; 
       efe.render(ctx);
-     // ctx.globalAlpha = 0.5; //permiteoverlapp
     };
-    
-    const limpiaPix = () =>{
+
+    const limpiaPix = () => {
       ctx.clearRect(0, 0, canvai.width, canvai.height);
-    }
+    };
 
     const FxModeON = () => {
       efe.update();
-      //requestAnimationFrame(updateGlitches);//si quieres la velocidad de tu compu descomenta esto!
     };
 
     const frameIntervalId = setInterval(captureFrame, 264); // Capture frame every 2 seconds
     const renderIntervalId = setInterval(renderFrame, 40 / 30); // Render at 30fps
-    const pixInterval = setInterval(limpiaPix,8000);
-    const fxInterval= setInterval(FxModeON,100);
+    const pixInterval = setInterval(limpiaPix, 8000);
+    const fxInterval = setInterval(FxModeON, 100);
 
     vid.onloadeddata = () => {
       renderFrame();
@@ -144,7 +148,7 @@ function CanvGrido({ IDenti, videoRef,fxMo, bgCol, cel_wi, cel_hi, cel_div_wi, c
       clearInterval(pixInterval);
       clearInterval(fxInterval);
     };
-  }, [IDenti, videoRef,fxMo, bgCol, cel_wi, cel_hi, cel_div_wi, cel_div_hi,radiu]);
+  }, [IDenti, videoRef, fxMo, bgCol, cel_wi, cel_hi, cel_div_wi, cel_div_hi, radiu]);
 
   return <canvas id={IDenti} ref={canv_Ref}></canvas>;
 }
