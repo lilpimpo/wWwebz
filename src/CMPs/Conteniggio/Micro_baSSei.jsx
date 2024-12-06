@@ -12,7 +12,7 @@ function Basei_Micro() {
             <CanvGrido
                 IDenti="Bassei"
                 videoRef={videoRef}
-                fxMo={deforMouse}
+                fxMo={pix_Shake}
                 bgCol="#ffb"
                 cel_wi={420}
                 cel_hi={360}

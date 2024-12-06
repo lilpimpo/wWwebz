@@ -26,27 +26,24 @@ export const deforMouse=(fxx) =>{
     
   };
 
-  export const preservo=(fxx) =>{
-    fxx.veloX=0;
-    fxx.veloY=0;
-    fxx.ease = 0.001;
-    fxx.friction = 0.99;
-    const mouseX = fxx.effecto.mouse.x - fxx.effecto.mouse.radius / 2;
-    const mouseY = fxx.effecto.mouse.y - fxx.effecto.mouse.radius / 2;
-    const distan_X = mouseX - fxx.x;
-    const distan_Y = mouseY - fxx.y;
-    const distan_XY = Math.hypot(distan_X,distan_Y);
-    if(distan_XY <= fxx.effecto.mouse.radius){
-        const angulo = Math.atanh(distan_Y,distan_X);
-        const fuerza = distan_XY - fxx.effecto.mouse.radius;
-        fxx.veloX = fuerza * Math.sin(angulo);
-        fxx.veloY= fuerza * Math.cos(angulo);
-       
-     
-
-    }
-   fxx.pixSnap_x += (fxx.veloX *= fxx.friction) - fxx.pixSnap_x * fxx.ease;//this.veloX;
-    fxx.pixSnap_y += (fxx.veloY *= fxx.friction) - fxx.pixSnap_y * fxx.ease;;//this.veloY;
-    
-  };
+export const preservo=(fxx) =>{
+  fxx.veloX=0;
+  fxx.veloY=0;
+  fxx.ease = 0.001;
+  fxx.friction = 0.99;
+  const mouseX = fxx.effecto.mouse.x - fxx.effecto.mouse.radius / 2;
+  const mouseY = fxx.effecto.mouse.y - fxx.effecto.mouse.radius / 2;
+  const distan_X = mouseX - fxx.x;
+  const distan_Y = mouseY - fxx.y;
+  const distan_XY = Math.hypot(distan_X,distan_Y);
+  if(distan_XY <= fxx.effecto.mouse.radius){
+      const angulo = Math.atanh(distan_Y,distan_X);
+      const fuerza = distan_XY - fxx.effecto.mouse.radius;
+      fxx.veloX = fuerza * Math.sin(angulo);
+      fxx.veloY= fuerza * Math.cos(angulo);
+  }
+  fxx.pixSnap_x += (fxx.veloX *= fxx.friction) - fxx.pixSnap_x * fxx.ease;//this.veloX;
+  fxx.pixSnap_y += (fxx.veloY *= fxx.friction) - fxx.pixSnap_y * fxx.ease;;//this.veloY;
+  
+};
 
