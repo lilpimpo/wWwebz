@@ -24,7 +24,6 @@ body {
   top: 6em;
 }
 .centrador #bloquePuzzle {
-  border: 1px solid black;
   justify-content: center;
   align-items: center;
   width: 32em;
